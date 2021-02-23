@@ -59,12 +59,33 @@ tvRouter.route("/tvshows/:id").get((req, resp) => {
 });
 
 tvRouter.route("/tvshows/:id").put((req, resp) => {
-  let id = req.params.id;
+  let id = Number(req.params.id);
   let show = req.body;
 
-  
+  let idx = data.findIndex((item) => {
+    return item.id === id;
+  });
 
-  resp.send(`Updating id = ${id}, item=${JSON.stringify(show)}`);
+  let original = data[idx];
+  orginal = { ...original, ...show };
+  data.splice(idx, 1, orginal);
+
+  resp.send(`${JSON.stringify(data[idx])}`);
+});
+
+tvRouter.route("/tvshows/:id").delete((req, resp) => {
+  let id = Number(req.params.id);
+
+  let idx = data.findIndex((item)=>{
+    return item.id === id;
+  })
+
+  if (idx >= 0) {
+    data.splice(idx, 1);
+    resp.send(`Item removed at ${idx}`);
+  }else{
+    resp.status(404).send(`Item with id=${id} not found.`);
+  }
 });
 
 module.exports = tvRouter;
