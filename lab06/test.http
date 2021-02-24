@@ -1,0 +1,59 @@
+#################
+### Help.html
+
+### 
+GET http://localhost:3000/qr
+
+###
+GET http://localhost:3000/help.html
+
+#################
+### GET by URL Param
+### Use query strings to set optional options
+
+### Synchronous Way
+GET http://localhost:3000/qr/tel:8123567
+
+###
+GET http://localhost:3000/qr/tel:8123567?ec_level=L&type=svg
+
+### Async Way
+GET http://localhost:3000/qr-async/tel:8123567
+
+### 
+GET http://localhost:3000/qr-async/tel:8123567?ec_level=L&type=svg
+
+#################
+### POST by Body
+### Use query strings to set optional options
+
+### 
+POST http://localhost:3000/qr/
+Content-Type: application/json
+
+{
+	"data": "http://www.google.com"
+}
+
+###
+POST http://localhost:3000/qr/
+Content-Type: application/x-www-form-urlencoded
+
+data=BEGIN:VCARD
+VERSION:3.0
+N:Gump;Forrest;;Mr.;
+FN:Forrest Gump
+ORG:Bubba Gump Shrimp Co.
+TITLE:Shrimp Man
+PHOTO;VALUE=URI;TYPE=GIF:http://www.example.com/dir_photos/my_photo.gif
+TEL;TYPE=WORK,VOICE:(111) 555-1212
+TEL;TYPE=HOME,VOICE:(404) 555-1212
+ADR;TYPE=WORK,PREF:;;100 Waters Edge;Baytown;LA;30314;United States of America
+LABEL;TYPE=WORK,PREF:100 Waters Edge\nBaytown\, LA 30314\nUnited States of America
+ADR;TYPE=HOME:;;42 Plantation St.;Baytown;LA;30314;United States of America
+LABEL;TYPE=HOME:42 Plantation St.\nBaytown\, LA 30314\nUnited States of America
+EMAIL:forrestgump@example.com
+REV:2008-04-24T19:52:43Z
+END:VCARD
+
+
